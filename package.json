@@ -1,0 +1,26 @@
+{
+  "name": "auth",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/byronPantoja/node-auth.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/byronPantoja/node-auth/issues"
+  },
+  "homepage": "https://github.com/byronPantoja/node-auth#readme",
+  "dependencies": {
+    "dotenv": "^10.0.0",
+    "fastify": "^3.23.0",
+    "fastify-static": "^4.5.0",
+    "mongodb": "^4.1.4"
+  }
+}
