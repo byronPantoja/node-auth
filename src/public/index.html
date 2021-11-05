@@ -9,19 +9,27 @@
   <body>
     <h1>Hello</h1>
 
-    <h3>Registration Form</h3>
-    <form action="" id="registration-form">
+    <h3>Register Form</h3>
+    <form action="" id="register-form">
       <input type="email" name="email" />
       <input type="password" name="password" />
       <button type="submit">Register</button>
     </form>
 
     <script>
-      () => {
-        const form = document.getElementById("registration-form");
-
-        form.addEventListener("submit", (e) => {});
-      };
+      (() => {
+        const form = document.getElementById("register-form");
+        form.addEventListener("submit", (e) => {
+          e.preventDefault();
+          const values = Object.values(form).reduce((obj, field) => {
+            if (field.name) {
+              obj[field.name] = field.value;
+            }
+            return obj;
+          }, {});
+          console.log("values", values);
+        });
+      })();
     </script>
   </body>
 </html>
