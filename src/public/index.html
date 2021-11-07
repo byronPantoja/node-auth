@@ -9,25 +9,70 @@
   <body>
     <h1>Hello</h1>
 
-    <h3>Register Form</h3>
+    <h3>Sign Up</h3>
     <form action="" id="register-form">
       <input type="email" name="email" />
       <input type="password" name="password" />
-      <button type="submit">Register</button>
+      <button type="submit">Sign Up</button>
+    </form>
+
+    <br />
+    <hr />
+    <br />
+
+    <h3>Sign In</h3>
+    <form action="" id="login-form">
+      <input type="email" name="email" />
+      <input type="password" name="password" />
+      <button type="submit">Sign In</button>
     </form>
 
     <script>
       (() => {
-        const form = document.getElementById("register-form");
-        form.addEventListener("submit", (e) => {
+        const registerForm = document.getElementById("register-form");
+        registerForm.addEventListener("submit", async (e) => {
           e.preventDefault();
-          const values = Object.values(form).reduce((obj, field) => {
-            if (field.name) {
-              obj[field.name] = field.value;
-            }
-            return obj;
-          }, {});
-          console.log("values", values);
+          try {
+            // collecting all the data from the form
+            const values = Object.values(registerForm).reduce((obj, field) => {
+              if (field.name) {
+                obj[field.name] = field.value;
+              }
+              return obj;
+            }, {});
+            //
+            fetch("/api/register", {
+              method: "POST",
+              body: JSON.stringify(values),
+              headers: { "Content-type": "application/json; charset=UTF-8" },
+            });
+            console.log("values", values);
+          } catch (e) {
+            console.error(e);
+          }
+        });
+
+        const loginForm = document.getElementById("login-form");
+        loginForm.addEventListener("submit", async (e) => {
+          e.preventDefault();
+          try {
+            // collecting all the data from the form
+            const values = Object.values(loginForm).reduce((obj, field) => {
+              if (field.name) {
+                obj[field.name] = field.value;
+              }
+              return obj;
+            }, {});
+            //
+            fetch("/api/authorize", {
+              method: "POST",
+              body: JSON.stringify(values),
+              headers: { "Content-type": "application/json; charset=UTF-8" },
+            });
+            console.log("values", values);
+          } catch (e) {
+            console.error(e);
+          }
         });
       })();
     </script>

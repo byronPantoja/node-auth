@@ -12,7 +12,7 @@ export async function connectDb() {
 
     // Confirm connection
     await client.db("dev833").command({ ping: 1 });
-    console.log("🗄️ Connected to DB Success");
+    console.log("Connection to DB Success");
   } catch (e) {
     console.error(e);
     // If there is a problem close connection to db
