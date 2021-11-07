@@ -1,8 +1,8 @@
 import bcrypt from "bcryptjs";
-
 const { genSalt, hash } = bcrypt;
 
-export async function registerUser(email, password) {
+export async function signUpUser(email, password) {
+  //dyanmic import - imports when its needed
   const { user } = await import("../user/user.js");
   // generate the salt
   const salt = await genSalt(10);

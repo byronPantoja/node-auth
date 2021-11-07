@@ -10,7 +10,7 @@
     <h1>Hello</h1>
 
     <h3>Sign Up</h3>
-    <form action="" id="register-form">
+    <form action="" id="signUp-form">
       <input type="email" name="email" />
       <input type="password" name="password" />
       <button type="submit">Sign Up</button>
@@ -21,7 +21,7 @@
     <br />
 
     <h3>Sign In</h3>
-    <form action="" id="login-form">
+    <form action="" id="signIn-form">
       <input type="email" name="email" />
       <input type="password" name="password" />
       <button type="submit">Sign In</button>
@@ -29,47 +29,43 @@
 
     <script>
       (() => {
-        const registerForm = document.getElementById("register-form");
-        registerForm.addEventListener("submit", async (e) => {
+        const signInForm = document.getElementById("signIn-form");
+        signInForm.addEventListener("submit", async (e) => {
           e.preventDefault();
           try {
             // collecting all the data from the form
-            const values = Object.values(registerForm).reduce((obj, field) => {
+            const values = Object.values(signInForm).reduce((obj, field) => {
               if (field.name) {
                 obj[field.name] = field.value;
               }
               return obj;
             }, {});
-            //
-            fetch("/api/register", {
+            const res = await fetch("/api/signin", {
               method: "POST",
               body: JSON.stringify(values),
               headers: { "Content-type": "application/json; charset=UTF-8" },
             });
-            console.log("values", values);
           } catch (e) {
             console.error(e);
           }
         });
 
-        const loginForm = document.getElementById("login-form");
-        loginForm.addEventListener("submit", async (e) => {
+        const signUpForm = document.getElementById("signUp-form");
+        signUpForm.addEventListener("submit", async (e) => {
           e.preventDefault();
           try {
             // collecting all the data from the form
-            const values = Object.values(loginForm).reduce((obj, field) => {
+            const values = Object.values(signUpForm).reduce((obj, field) => {
               if (field.name) {
                 obj[field.name] = field.value;
               }
               return obj;
             }, {});
-            //
-            fetch("/api/authorize", {
+            const res = await fetch("/api/signup", {
               method: "POST",
               body: JSON.stringify(values),
               headers: { "Content-type": "application/json; charset=UTF-8" },
             });
-            console.log("values", values);
           } catch (e) {
             console.error(e);
           }
