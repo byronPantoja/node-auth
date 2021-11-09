@@ -9,38 +9,53 @@
   <body>
     <h1>Hello</h1>
 
-    <h3>Sign Up</h3>
-    <form action="" id="signUp-form">
+    <h3>Register Form</h3>
+    <form id="register-form">
       <input type="email" name="email" />
       <input type="password" name="password" />
-      <button type="submit">Sign Up</button>
+      <button type="submit">Register</button>
     </form>
 
     <br />
     <hr />
     <br />
 
-    <h3>Sign In</h3>
-    <form action="" id="signIn-form">
+    <h3>Login Form</h3>
+    <form id="login-form">
       <input type="email" name="email" />
       <input type="password" name="password" />
-      <button type="submit">Sign In</button>
+      <button type="submit">Login</button>
     </form>
 
+    <br />
+    <hr />
+    <br />
+
+    <button onclick="logout()">Logout</button>
+
     <script>
+      async function logout() {
+        try {
+          const res = await fetch("/api/logout", {
+            method: "POST",
+          });
+        } catch (e) {
+          console.error(e);
+        }
+      }
+
       (() => {
-        const signInForm = document.getElementById("signIn-form");
-        signInForm.addEventListener("submit", async (e) => {
+        const registerForm = document.getElementById("register-form");
+        registerForm.addEventListener("submit", async (e) => {
           e.preventDefault();
           try {
-            // collecting all the data from the form
-            const values = Object.values(signInForm).reduce((obj, field) => {
+            const values = Object.values(registerForm).reduce((obj, field) => {
               if (field.name) {
                 obj[field.name] = field.value;
               }
               return obj;
             }, {});
-            const res = await fetch("/api/signin", {
+            const res = await fetch("/api/register", {
               method: "POST",
               body: JSON.stringify(values),
               headers: { "Content-type": "application/json; charset=UTF-8" },
@@ -49,19 +64,21 @@
             console.error(e);
           }
         });
-
-        const signUpForm = document.getElementById("signUp-form");
-        signUpForm.addEventListener("submit", async (e) => {
+        // Find form element
+        const loginForm = document.getElementById("login-form");
+        // Wait for event
+        loginForm.addEventListener("submit", async (e) => {
           e.preventDefault();
           try {
-            // collecting all the data from the form
-            const values = Object.values(signUpForm).reduce((obj, field) => {
+            // get form values
+            const values = Object.values(loginForm).reduce((obj, field) => {
               if (field.name) {
                 obj[field.name] = field.value;
               }
               return obj;
             }, {});
-            const res = await fetch("/api/signup", {
+            // Submit form
+            const res = await fetch("/api/authorize", {
               method: "POST",
               body: JSON.stringify(values),
               headers: { "Content-type": "application/json; charset=UTF-8" },

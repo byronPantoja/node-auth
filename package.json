@@ -25,5 +25,8 @@
     "fastify-static": "^4.5.0",
     "jsonwebtoken": "^8.5.1",
     "mongodb": "^4.1.4"
+  },
+  "devDependencies": {
+    "@types/jsonwebtoken": "^8.5.5"
   }
 }
